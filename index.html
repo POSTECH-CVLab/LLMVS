@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contrastive Mean-Shift Learning for Generalized Category Discovery</title>
+  <title>Burst Image Super-Resolution with Base Frame Selection</title>
   <!-- Bootstrap -->
   <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -35,12 +35,16 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <h2>Contrastive Mean-Shift Learning for Generalized Category Discovery</h2>
-          <h4 style="color:#5a6268;">CVPR 2024 </h4>
+          <h2>Burst Image Super-Resolution with Base Frame Selection</h2>
+          <h4 style="color:#5a6268;">CVPR 2024 Workshop (9<sup>th</sup> NTIRE)</h4>
           <hr>
           <h6>
-            <a href="http://sua-choi.github.io" target="_blank">Sua Choi</a>,
-            <a href="http://dahyun-kang.github.io" target="_blank">Dahyun Kang</a>,
+            <a href="" target="_blank">Sanghyun Kim*</a>,
+            <a href="https://mlee47.github.io/" target="_blank">Min Jung Lee*</a>,
+            <a href="https://woo525.github.io/" target="_blank">Woohyeok Kim</a>,
+            <a href="https://hesedjds.github.io/" target="_blank">Deunsol Jung</a>,
+            <a href="https://rimchang.github.io/" target="_blank">Jaesung Rim</a>,
+            <a href="https://www.scho.pe.kr/" target="_blank">Sunghyun Cho</a>,
             <a href="https://cvlab.postech.ac.kr/~mcho/" target="_blank">Minsu Cho</a>
           </h6>
           <p>
@@ -49,15 +53,15 @@
 
           <div class="row justify-content-center">
             <div class="column">
-              <p class="mb-5"><a class="btn btn-large btn-light" href="http://arxiv.org/abs/2404.09451" role="button"
+              <p class="mb-5"><a class="btn btn-large btn-light" href="https://arxiv.org/abs/2406.17869" role="button"
                   target="_blank">
                   <i class="fa fa-file"></i> Paper</a> </p>
             </div>
-            <div class="column">
+            <!-- <div class="column">
               <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/sua-choi/CMS"
                   role="button" target="_blank">
                   <i class="fa fa-github-alt"></i> Code </a> </p>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -76,13 +80,11 @@
         <!-- <hr style="margin-top:0px"> -->
 
         <p class="text-left">
-          We address the problem of generalized category discovery (GCD) that aims to partition a partially labeled collection of images; 
-          only a small part of the collection is labeled and the total number of target classes is unknown. To address this generalized 
-          image clustering problem, we revisit the mean-shift algorithm, i.e., a classic, powerful technique for mode seeking, and 
-          incorporate it into a contrastive learning framework. The proposed method, dubbed Contrastive Mean-Shift (CMS) learning, 
-          trains an image encoder to produce representations with better clustering properties by an iterative process of mean shift and 
-          contrastive update. Experiments demonstrate that our method, both in settings with and without the total number of clusters 
-          being known, achieves state-of-the-art performance on six public GCD benchmarks without bells and whistles.
+          Burst image super-resolution has been a topic of active research in recent years due to its ability to obtain a high resolution image using complementary information between multiple frames in the burst. 
+          In this work, we explore using burst shots with non-uniform exposures to confront real-world practical scenarios by introducing a new benchmark dataset, dubbed Non-uniformly Exposed Burst Image (NEBI), that includes the burst frames at varying exposure times to obtain a broader range of irradiance and motion characteristics within a scene.
+          As burst shots with non-uniform exposures exhibit varying levels of degradation, fusing information of the burst shots into the first frame as a base frame may not result in optimal image quality. 
+          To address this limitation, we propose a Frame Selection Network~(FSN) for non-uniform scenarios. This network seamlessly integrates into existing super-resolution methods in a plug-and-play manner with low computational cost. 
+          The comparative analysis reveals the effectiveness of the non-uniform setting for the practical scenario and our FSN on synthetic-/real- NEBI datasets.
         </p>
         <br>
       </div>
@@ -90,40 +92,90 @@
   </div>
 </section>
 <br>
+<br>
 
 <section>
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <h2>Methods</h2>
+        <h2>Motivation</h2>
         <!-- <hr style="margin-top:0px"> -->
       </div>
         <br>
-        <div class="col-12">
-          <p class="text-left">
-          <img src="images/overview.png" style="width:100%; margin-top:10px; margin-bottom:10px;"">
-          <h4>Contrastive Mean-Shift learning</h4>
-          <!-- We revisit the mean-shift and introduce contrastive mean-shift (CMS) learning for generalized category discovery. -->
-          Given a collection of images, each initial image embedding $\boldsymbol{v}_i$ from an image encoder takes a single step of 
-          mean shift to be $\boldsymbol{z}_i$ by aggregating its $k$ nearest neighbors with a weight kernel $\varphi(\cdot)$. The 
-          encoder network is then updated by contrastive learning with the mean-shifted embeddings, which draws a mean-shifted embedding 
-          of image $x_{i}$ and that of its augmented image $x_{i}^{+}$ closer and pushes those of distinct images apart from each other.
-          <br>
-          <br>
-          <h4>Iterative Mean-Shift at inference</h4>
-          To improve the final clustering property of the embeddings, we perform multi-step mean shift on the embeddings before
-          agglomerative clustering. Starting from the initial embeddings from the learned encoder, we update them to $t$-step 
-          mean-shifted embeddings until the clustering accuracy on the labeled data converges. The final cluster assignment is obtained 
-          by performing agglomerative clustering on the multi-step mean-shifted embeddings. 
-          <br>          
-        </p>
-        <br>
-        
+        <div class="col-12 text-center">
+          <h4>Why do we need non-uniformly exposed burst?</h4>
+        </div>
+        <div class="col-12" style="display:flex; align-items:center; margin-bottom:20px;">
+          <img src="images/teaser1.png" style="width:50%; margin-top:10px; margin-right:20px;">
+          <div>
+            When burst photography uses the same exposure times for all frames, it often results in poor quality images due to camera noise and motion blur if the exposure time isn't optimal.
+            It's hard to determine the best exposure time in real-world scenarios, making this approach less practical.
+            However, using burst shots with varied exposure times can help reconstruct high-resolution images as though the optimal exposure time was used.
+          </div>
+        </div>
+        <div class="col-12 text-center">
+          <h4>Why do we need a Frame Selection Network?</h4>
+        </div>
+        <div class="col-12" style="display:flex; align-items:center; margin-bottom:20px;">
+          <img src="images/teaser2.png" style="width:50%; margin-top:10px; margin-right:20px;">
+          <div>
+            Burst shots with non-uniform exposures display varying degrees of quality, affecting the alignment and fusion of features between the base and subsequent frames, which can reduce overall image quality.
+            Previous methods typically use the first frame as the base frame, ignoring its potential negative effects on image restoration.
+            To address this issue, we propose a Frame Selection Network (FSN) that identifies the most suitable base frame to enhance overall image quality.          </div>
+        </div>
       </div>
     </div>
 </section>
 <br>
+<br>
+<br>
 
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h2>Benchmark: Synthetic-/Real-NEBI</h2>
+      </div>
+
+      <div class="col-12">
+        <p class="text-left">
+          <img src="images/benchmark.png" style="width:100%; margin-top:10px; margin-bottom:10px;">  
+          <br> 
+          In the burst sequence, from left to right, the exposure time increases, leading to reduced noise and increased blur.
+          <br> 
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+<br>
+<br>
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h2>Method</h2>
+      </div>
+
+      <div class="col-12">
+        <p class="text-left">
+          <!-- <h4>Evaluation on GCD</h4> -->
+          <img src="images/method.png" style="width:100%; margin-top:10px; margin-bottom:10px;">  
+          <br> 
+          FSN first constructs the image feature of each frame using CNN.
+          The constructed image feature is fed into our <b>C</b>orrelation-based <b>M</b>otion <b>A</b>ware (CMA) blocks, which update the image feature based on motion information extracted from the burst frames.
+          To extract motion information from the burst frames, we propose <b>F</b>eature <b>C</b>orrelation <b>M</b>odule (FCM), which computes the local correlation along both spatial and temporal axes.
+          <br> 
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+<br>
+<br>
 
 <section>
   <div class="container">
@@ -134,21 +186,28 @@
 
       <div class="col-12">
         <p class="text-left">
-          <h4>Evaluation on GCD</h4>
-          <img src="images/results.png" style="width:100%; margin-top:10px; margin-bottom:10px;">  
+          
+          <div class="col-12 text-center">
+            <h4>Evaluation on Synthetic-/Real-NEBI</h4>
+          </div>
+          <img src="images/experiment1.png" style="width:60%; margin-top:10px; display: block; margin-left: auto; margin-right: auto;">  
           <br> 
-          Comparison with the state of the arts on GCD using <i>DINO-ViT-B/16</i>, evaluated with or without the ground-truth 
-          class number K for clustering. 
-
-          <img src="images/results2.png" style="width:100%; margin-top:20px; margin-bottom:10px;">
-          Comparison with the state of the arts on GCD using <i>CLIP-ViT-B/16</i>, evaluated with or without the ground-truth 
-          class number K for clustering.
+          Comparison of existing burst super-resolution models and their variants incorporating our Feature Selection Network (FSN), along with an evaluation against the Auto-Exposure (AE) algorithm.
           <br> 
           <br> 
-          <h4>Ablation study</h4>
-          <img src="images/ablations.png" style="width:100%; margin-top:10px; margin-bottom:10px;">
-          Effectiveness of each component of our method. SSK denotes semi-supervised k-means clustering and IMS denotes 
-          iterative mean-shift.
+          <div class="col-12 text-center">
+            <h4>Training strategies on Real-NEBI</h4>
+          </div>
+          <img src="images/experiment2.png" style="width:40%; margin-top:10px; display: block; margin-left: auto; margin-right: auto;">
+          <br> 
+          When training a Frame Selection Network (FSN) with different targets like PSNR, SSIM, and LPIPS using synthetic data, and then evaluating it on real data, the training target affects the performance.
+          <br> 
+          <div class="col-12 text-center">
+            <h4>Ablation study</h4>
+          </div>
+          <img src="images/ablation1.png" style="width:40%; margin-top:10px; display: block; margin-left: auto; margin-right: auto;">
+          <br> 
+          Comparison of the performance of a baseline super-resolution network against variants that incorporate varying numbers of CMA blocks.
           <br> 
         </p>
       </div>
@@ -156,7 +215,8 @@
   </div>
 </section>
 <br>
-
+<br>
+<br>
 
 <section>
   <div class="container">
@@ -167,11 +227,9 @@
 
       <div class="col-12">
         <p class="text-left">
-        <img src="images/qualitative.png" style="width:100%; margin-top:10px; margin-bottom:10px;">
-        kNN retrieved images of the initial embedding $\boldsymbol{v}$ and mean-shifted embedding $\boldsymbol{z}$ on CUB-200-2011. 
-        Green denotes the correct class and red an incorrect class.
-      </div>
-
+        <img src="images/qual.png" style="width:100%; margin-top:10px; margin-bottom:10px;">
+        BIPNet, when combined with our frame selector, improves the clarity of high-frequency image details by effectively merging complementary information from multiple frames into the chosen base frame.
+        Conversely, without the frame selector, BIPNet tends to produce blurry images due to significant degradation in the initial frame.
       <div class="col-12">
         <p class="text-left">
         </p>
@@ -191,10 +249,11 @@
       <hr style="margin-top:0px">
       <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
 <code>
-  @inproceedings{choi2024contrastive,
-    title={Contrastive Mean-Shift Learning for Generalized Category Discovery},
-    author={Choi, Sua and Kang, Dahyun and Cho, Minsu},
+  @inproceedings{kim2024burst,
+    title={Burst Image Super-Resolution with Base Frame Selection},
+    author={Kim, Sanghyun and Lee, Minjung and Kim, Woohyeok and Jung, Deunsol and Rim, Jaesung and Cho, Sunghyun and Cho, Minsu},
     booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+    pages={5940--5949},
     year={2024}
   }
 </code>
