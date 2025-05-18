@@ -35,33 +35,29 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <h2>Burst Image Super-Resolution with Base Frame Selection</h2>
-          <h4 style="color:#5a6268;">CVPR 2024 Workshop (9<sup>th</sup> NTIRE)</h4>
+          <h2>Video Summarization with Large Language Models</h2>
+          <h4 style="color:#5a6268;">CVPR 2025</h4>
           <hr>
           <h6>
-            <a href="" target="_blank">Sanghyun Kim*</a>,
-            <a href="https://mlee47.github.io/" target="_blank">Min Jung Lee*</a>,
-            <a href="https://woo525.github.io/" target="_blank">Woohyeok Kim</a>,
-            <a href="https://hesedjds.github.io/" target="_blank">Deunsol Jung</a>,
-            <a href="https://rimchang.github.io/" target="_blank">Jaesung Rim</a>,
-            <a href="https://www.scho.pe.kr/" target="_blank">Sunghyun Cho</a>,
+            <a href="https://mlee47.github.io/" target="_blank">Min Jung Lee</a>,
+            <a href="https://gongda0e.github.io/" target="_blank">Dayoung Gong</a>,
             <a href="https://cvlab.postech.ac.kr/~mcho/" target="_blank">Minsu Cho</a>
           </h6>
           <p>
-            Pohang University of Science and Technology (POSTECH)
+            Pohang University of Science and Technology (POSTECH), GenGenAI
           </p>
 
           <div class="row justify-content-center">
             <div class="column">
-              <p class="mb-5"><a class="btn btn-large btn-light" href="https://arxiv.org/abs/2406.17869" role="button"
+              <p class="mb-5"><a class="btn btn-large btn-light" href="https://arxiv.org/pdf/2504.11199" role="button"
                   target="_blank">
                   <i class="fa fa-file"></i> Paper</a> </p>
             </div>
-            <!-- <div class="column">
-              <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/sua-choi/CMS"
-                  role="button" target="_blank">
-                  <i class="fa fa-github-alt"></i> Code </a> </p>
-            </div> -->
+            <div class="column">
+              <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/mlee47/LLMVS" role="button"
+                  target="_blank">
+                  <i class="fa fa-file"></i> Code</a> </p>
+            </div>
           </div>
         </div>
       </div>
@@ -80,11 +76,8 @@
         <!-- <hr style="margin-top:0px"> -->
 
         <p class="text-left">
-          Burst image super-resolution has been a topic of active research in recent years due to its ability to obtain a high resolution image using complementary information between multiple frames in the burst. 
-          In this work, we explore using burst shots with non-uniform exposures to confront real-world practical scenarios by introducing a new benchmark dataset, dubbed Non-uniformly Exposed Burst Image (NEBI), that includes the burst frames at varying exposure times to obtain a broader range of irradiance and motion characteristics within a scene.
-          As burst shots with non-uniform exposures exhibit varying levels of degradation, fusing information of the burst shots into the first frame as a base frame may not result in optimal image quality. 
-          To address this limitation, we propose a Frame Selection Network~(FSN) for non-uniform scenarios. This network seamlessly integrates into existing super-resolution methods in a plug-and-play manner with low computational cost. 
-          The comparative analysis reveals the effectiveness of the non-uniform setting for the practical scenario and our FSN on synthetic-/real- NEBI datasets.
+          The exponential increase in video content poses significant challenges in terms of efficient navigation, search, and retrieval, thus requiring advanced video summarization techniques. Existing video summarization methods, which heavily rely on visual features and temporal dynamics, often fail to capture the semantics of video content, resulting in incomplete or incoherent summaries. To tackle the challenge, we propose a new video summarization framework that leverages the capabilities of recent Large Language Models (LLMs), expecting that the knowledge learned from massive data enables LLMs to evaluate video frames in a manner that better aligns with diverse semantics and human judgments, effectively addressing the inherent subjectivity in defining keyframes.
+Our method, dubbed  <b>LLM</b>-based <b>V</b>ideo <b>S</b>ummarization (<b>LLMVS</b>), translates video frames into a sequence of captions using a Muti-modal Large Language Model (M-LLM) and then assesses the importance of each frame using an LLM, based on the captions in its local context. These local importance scores are refined through a global attention mechanism in the entire context of video captions, ensuring that our summaries effectively reflect both the details and the overarching narrative. Our experimental results demonstrate the superiority of the proposed method over existing ones in standard benchmarks, highlighting the potential of LLMs in the processing of multimedia content.
         </p>
         <br>
       </div>
@@ -98,31 +91,28 @@
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <h2>Motivation</h2>
+        <h2>Contributions</h2>
         <!-- <hr style="margin-top:0px"> -->
       </div>
         <br>
         <div class="col-12 text-center">
-          <h4>Why do we need non-uniformly exposed burst?</h4>
         </div>
         <div class="col-12" style="display:flex; align-items:center; margin-bottom:20px;">
-          <img src="images/teaser1.png" style="width:50%; margin-top:10px; margin-right:20px;">
+          <img src="images/teaser.png" style="width:50%; margin-top:10px; margin-right:20px;">
           <div>
-            When burst photography uses the same exposure times for all frames, it often results in poor quality images due to camera noise and motion blur if the exposure time isn't optimal.
-            It's hard to determine the best exposure time in real-world scenarios, making this approach less practical.
-            However, using burst shots with varied exposure times can help reconstruct high-resolution images as though the optimal exposure time was used.
+            <ol>
+              <li><b>(M-)LLM-centric summarization</b> <br>
+                We introduce LLMVS, a novel video summarization framework that leverages (M-)LLMs to utilize textual data and general knowledge in video summarization effectively.
+              </li>
+              <li><b>Local-to-global architecture</b> <br>
+                The proposed local-to-global video summarization framework integrates local context via window-based aggregation and global context through self-attention, enabling a comprehensive understanding of video content.
+              </li>
+              <li><b>Leveraging LLM Embeddings</b> <br>
+                Experimental results show that using output embeddings from LLMs is more effective for video summarization than using direct answers generated by LLMs.
+              </li>
+            </ol>
           </div>
         </div>
-        <div class="col-12 text-center">
-          <h4>Why do we need a Frame Selection Network?</h4>
-        </div>
-        <div class="col-12" style="display:flex; align-items:center; margin-bottom:20px;">
-          <img src="images/teaser2.png" style="width:50%; margin-top:10px; margin-right:20px;">
-          <div>
-            Burst shots with non-uniform exposures display varying degrees of quality, affecting the alignment and fusion of features between the base and subsequent frames, which can reduce overall image quality.
-            Previous methods typically use the first frame as the base frame, ignoring its potential negative effects on image restoration.
-            To address this issue, we propose a Frame Selection Network (FSN) that identifies the most suitable base frame to enhance overall image quality.          </div>
-        </div>
       </div>
     </div>
 </section>
@@ -130,27 +120,6 @@
 <br>
 <br>
 
-<section>
-  <div class="container">
-    <div class="row">
-      <div class="col-12 text-center">
-        <h2>Benchmark: Synthetic-/Real-NEBI</h2>
-      </div>
-
-      <div class="col-12">
-        <p class="text-left">
-          <img src="images/benchmark.png" style="width:100%; margin-top:10px; margin-bottom:10px;">  
-          <br> 
-          In the burst sequence, from left to right, the exposure time increases, leading to reduced noise and increased blur.
-          <br> 
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-<br>
-<br>
-<br>
 
 <section>
   <div class="container">
@@ -164,9 +133,11 @@
           <!-- <h4>Evaluation on GCD</h4> -->
           <img src="images/method.png" style="width:100%; margin-top:10px; margin-bottom:10px;">  
           <br> 
-          FSN first constructs the image feature of each frame using CNN.
-          The constructed image feature is fed into our <b>C</b>orrelation-based <b>M</b>otion <b>A</b>ware (CMA) blocks, which update the image feature based on motion information extracted from the burst frames.
-          To extract motion information from the burst frames, we propose <b>F</b>eature <b>C</b>orrelation <b>M</b>odule (FCM), which computes the local correlation along both spatial and temporal axes.
+          Our LLMVS framework consists of three key components: text description generation, local importance scoring, and global context aggregation.
+          First, captions for each video frame are generated using a pre-trained Multi-modal Large Language Model (M-LLM).
+          These captions are then incorporated into the query component of an LLM by segmenting through a sliding window local context, while instructions and examples are provided as part of the in-context learning prompt.
+          We obtain the output embeddings from an intermediate layer of the LLM, categorized into instructions, examples, queries, and answers. The query and answer embeddings are pooled and passed through an MLP to produce inputs for the global context aggregator, which encodes the overall context of the input video.
+          Finally, we obtain the output score vectors for the corresponding input video frames.          
           <br> 
         </p>
       </div>
@@ -188,27 +159,14 @@
         <p class="text-left">
           
           <div class="col-12 text-center">
-            <h4>Evaluation on Synthetic-/Real-NEBI</h4>
+            <h4>Comparison with the state of the arts</h4>
           </div>
           <img src="images/experiment1.png" style="width:60%; margin-top:10px; display: block; margin-left: auto; margin-right: auto;">  
           <br> 
-          Comparison of existing burst super-resolution models and their variants incorporating our Feature Selection Network (FSN), along with an evaluation against the Auto-Exposure (AE) algorithm.
-          <br> 
-          <br> 
-          <div class="col-12 text-center">
-            <h4>Training strategies on Real-NEBI</h4>
-          </div>
-          <img src="images/experiment2.png" style="width:40%; margin-top:10px; display: block; margin-left: auto; margin-right: auto;">
-          <br> 
-          When training a Frame Selection Network (FSN) with different targets like PSNR, SSIM, and LPIPS using synthetic data, and then evaluating it on real data, the training target affects the performance.
-          <br> 
-          <div class="col-12 text-center">
-            <h4>Ablation study</h4>
-          </div>
-          <img src="images/ablation1.png" style="width:40%; margin-top:10px; display: block; margin-left: auto; margin-right: auto;">
-          <br> 
-          Comparison of the performance of a baseline super-resolution network against variants that incorporate varying numbers of CMA blocks.
-          <br> 
+          LLMVS achieves state-of-the-art performance on both datasets, significantly outperforming the zero-shot LLM by effectively addressing both general and subjective summarization aspects.
+          The global context aggregator \(\psi\) plays a key role by enhancing LLM's sequence-level reasoning. Unlike prior models that treat text as auxiliary, LLMVS places language at the core, leveraging LLMs' reasoning to generate more coherent and semantically rich summaries.
+
+          <br>
         </p>
       </div>
     </div>
@@ -228,9 +186,15 @@
       <div class="col-12">
         <p class="text-left">
         <img src="images/qual.png" style="width:100%; margin-top:10px; margin-bottom:10px;">
-        BIPNet, when combined with our frame selector, improves the clarity of high-frequency image details by effectively merging complementary information from multiple frames into the chosen base frame.
-        Conversely, without the frame selector, BIPNet tends to produce blurry images due to significant degradation in the initial frame.
-      <div class="col-12">
+        The x- and y-axes are time step \(t\) and importance score \(s\), respectively.
+        In this figure, the blue line represents the average user scores, while the orange line shows the normalized predicted scores from our model.
+        All scores are in the range of 0 to 1.
+        Green areas indicate segments that received high importance scores, while pink areas correspond to segments with low scores.
+        <br>
+        LLMVS produces importance scores that closely follow human annotations, particularly emphasizing action-related scenes.
+        Qualitative examples show that static or interview segments receive lower scores, while dynamic actions like riding or performing stunts are rated higher, indicating the model's ability to highlight narratively significant, high-energy content.
+          
+        <div class="col-12">
         <p class="text-left">
         </p>
       </div>
@@ -249,12 +213,11 @@
       <hr style="margin-top:0px">
       <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
 <code>
-  @inproceedings{kim2024burst,
-    title={Burst Image Super-Resolution with Base Frame Selection},
-    author={Kim, Sanghyun and Lee, Minjung and Kim, Woohyeok and Jung, Deunsol and Rim, Jaesung and Cho, Sunghyun and Cho, Minsu},
+  @inproceedings{lee2025video,
+    title={Video Summarization with Large Language Models},
+    author={Lee, Minjung and Gong, Dayoung and Cho, Minsu},
     booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
-    pages={5940--5949},
-    year={2024}
+    year={2025}
   }
 </code>
               </pre>
