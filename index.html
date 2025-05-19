@@ -137,7 +137,8 @@ Our method, dubbed  <b>LLM</b>-based <b>V</b>ideo <b>S</b>ummarization (<b>LLMVS
           First, captions for each video frame are generated using a pre-trained Multi-modal Large Language Model (M-LLM).
           These captions are then incorporated into the query component of an LLM by segmenting through a sliding window local context, while instructions and examples are provided as part of the in-context learning prompt.
           We obtain the output embeddings from an intermediate layer of the LLM, categorized into instructions, examples, queries, and answers. The query and answer embeddings are pooled and passed through an MLP to produce inputs for the global context aggregator, which encodes the overall context of the input video.
-          Finally, we obtain the output score vectors for the corresponding input video frames.          
+          Finally, we obtain the output score vectors for the corresponding input video frames.
+          The output score vectors are then optimized using the Mean Squared Error (MSE) loss function.
           <br> 
         </p>
       </div>
@@ -165,8 +166,31 @@ Our method, dubbed  <b>LLM</b>-based <b>V</b>ideo <b>S</b>ummarization (<b>LLMVS
           <br> 
           LLMVS achieves state-of-the-art performance on both datasets, significantly outperforming the zero-shot LLM by effectively addressing both general and subjective summarization aspects.
           The global context aggregator \(\psi\) plays a key role by enhancing LLM's sequence-level reasoning. Unlike prior models that treat text as auxiliary, LLMVS places language at the core, leveraging LLMs' reasoning to generate more coherent and semantically rich summaries.
-
           <br>
+          <br> 
+          <br> 
+
+          <div class="col-12 text-center">
+            <h4>Finetuning (M-)LLM, \(\phi\) and \(\pi\)</h4>
+          </div>
+          <img src="images/experiment2.png" style="width:60%; margin-top:10px; display: block; margin-left: auto; margin-right: auto;">  
+          <br> 
+          We conduct experiments using M-LLM and LLM in both zero-shot and finetuned settings. 
+          In zero-shot, providing captions from M-LLM to the LLM improved results over direct scoring by M-LLM alone.
+          For finetuned models, we applied LoRA, with improvements shown in the first and second rows, and third and fourth rows. 
+          LLMVS showed greater improvements in the fifth row, demonstrating its effectiveness beyond simple finetuning.
+          <br>
+          <br> 
+          <br> 
+
+          <div class="col-12 text-center">
+            <h4>Prompting to (M-)LLM, \(\phi\) and \(\pi\)</h4>
+          </div>
+          <img src="images/experiment3.png" style="width:60%; margin-top:10px; display: block; margin-left: auto; margin-right: auto;">  
+          <br> 
+          We evaluate different prompting styles for M-LLM and LLM.
+          For M-LLM, a generic prompt outperforms region-specific prompts, suggesting that broader descriptions better capture scene dynamics.
+          For LLM, direct numerical scoring of frame importance is more effective than textual summarization, indicating that explicit importance scores provide clearer evaluations of frame significance.
         </p>
       </div>
     </div>
